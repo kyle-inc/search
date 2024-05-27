@@ -32,7 +32,7 @@ div.selection-box {
     justify-content: flex-start;
     flex-wrap: wrap;
     gap: 30px;
-    background-color: transparent;
+    background-color: white;
 }
 
 .engine-image {
@@ -46,9 +46,20 @@ div.selection-box {
     padding: 5px 0px;
 }
 
+.signinbutton {
+    background-color: #1e90ff;
+    color: black;
+    padding: 8px 25px;
+    border-radius: 15px;
+    border: 0px;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+}
+
 div.websites {
     position: fixed;
-    top: 5vh;
+    top: 8vh;
     left: 0px;
     right: 0px;
     width: 100vw;
@@ -82,20 +93,23 @@ div.websites {
     padding: 1% 1%;
 }
 
-.kyle-search-branding {
+.kylesearchbranding {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.kyle-search-branding img {
+.searchlogo {
     /* max-width: 50vh; */
     max-width: 26vw;
     width: auto;
     /* max-width: 55vh; */
     min-width: 305px;
-    margin-top: 30vh;
     /* margin-right: 1vh; */
+}
+
+.kylesearchbranding a {
+    margin-top: 30vh;
 }
 
 
@@ -134,6 +148,7 @@ div.websites {
     background-repeat: no-repeat;
     padding-left: 45px;
 }
+
 
 
 .kylelogopara {
