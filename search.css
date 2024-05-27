@@ -1,18 +1,18 @@
 /* darkmode css */
 :root {
-    --background-color: #202124;
-    --selection-box-background: black;
-    --font-color: silver;
-    --inputfield-background: black;
-    --inputfield-color: white;
-}
-
-.light-theme {
     --background-color: silver;
     --selection-box-background: white;
     --font-color: black;
     --inputfield-background: whitesmoke;
     --inputfield-color: black;
+}
+
+.dark-theme {
+    --background-color: #202124;
+    --selection-box-background: black;
+    --font-color: silver;
+    --inputfield-background: black;
+    --inputfield-color: white;
 }
 
 #modeicon {
