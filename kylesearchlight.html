@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta name="description" content="This is description"> -->
+    <meta name="keyword" content="KYLE Search, KYLE, Kyle, Kyle Search, Search, K Search">
+    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Poppins @ Google Fonts -->
+    <!-- font-family: 'Poppins', sans-serif; -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+    <!-- Fredoka @ Google Fonts -->
+    <!-- font-family: 'Fredoka', sans-serif; -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka&display=swap" rel="stylesheet">
+
+    <!-- Ununtu @ Google Fonts -->
+    <!-- font-family: 'Ubuntu', sans-serif; -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+
+    <!-- font-family: "NordiquePro-Semibold"; -->
+    <!-- demo: https://www.onlinewebfonts.com/download/621dd29e050b14aea6958e1b3f697ee3 -->
+    <link href="https://db.onlinewebfonts.com/c/621dd29e050b14aea6958e1b3f697ee3?family=NordiquePro-Semibold" rel="stylesheet">
+
+    <!-- font-family: "Afrobeat W00 Normal"; -->
+    <!-- demo: https://www.onlinewebfonts.com/download/fabf87651926ea5dba6b34559ba25409 -->
+    <link href="https://db.onlinewebfonts.com/c/fabf87651926ea5dba6b34559ba25409?family=Afrobeat+W00+Normal" rel="stylesheet">
+
+    <link rel="stylesheet" href="kyleweb.css">
+
+    <link rel="icon" href="https://kyle-inc.github.io/resource/kylesearch/kylesearch.png" type="image/x-icon">
+    <title>KYLE Search</title>
+
+</head>
+
+<style>
+    a {
+        text-decoration: none;
+    }
+
+    ::selection {
+        color: grey;
+        background: transparent;
+    }
+
+
+    /* ------------------- Scroll Bar ------------------- */
+
+    /* width */
+    ::-webkit-scrollbar {
+        width: 0.75vw;
+        background-color: transparent;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        /* border-radius: 10px; */
+        background-color: transparent;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: grey;
+        border-radius: 35px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: silver;
+    }
+
+
+
+    body {
+        background-color: #f0f0f0;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        margin: 0;
+        border: 0;
+        top: 0;
+    }
+
+    .logonav {
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: #DDE6ED;
+    }
+
+    .KYLEsearchImage {
+        width: 15vh;
+        min-width: 260px;
+        display: block;
+        margin: auto;
+        padding: 1vh 0;
+    }
+
+    .content {
+        margin-top: 9vh;
+    }
+
+    .welcomeheading {
+        font-family: 'Ubuntu', sans-serif;
+        font-size: 35px;
+        padding-left: 5vw;
+        padding-top: 33vh;
+        color: #4f30ab;
+    }
+
+    .welcomenote {
+        font-family: 'Fredoka', sans-serif;
+        font-size: 21px;
+        padding-left: 5vw;
+        margin-top: 0;
+        color: #36454f;
+    }
+
+    .gettingstartedheading {
+        font-family: 'Ubuntu', sans-serif;
+        font-size: 35px;
+        padding-left: 3.5vw;
+        padding-top: 40vh;
+        color: #FB542B;
+    }
+
+    .gettingstartednote {
+        font-family: 'Fredoka', sans-serif;
+        font-size: 21px;
+        font-weight: bold;
+        padding-left: 5vw;
+        color: #36454f;
+    }
+
+    .apisoption {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        width: 100%;
+        height: 60vh;
+        align-items: center;
+    }
+
+    .apisoption img {
+        padding: 0 0;
+    }
+
+    .h2universal {
+        font-family: 'Ubuntu', sans-serif;
+        font-size: 35px;
+        padding-left: 3.5vw;
+        padding-top: 18vh;
+        color: #0047AB;
+    }
+
+    .divuniversal {
+        font-family: 'Fredoka', sans-serif;
+        font-size: 21px;
+        font-weight: bold;
+        padding-left: 5vw;
+        color: #36454f;
+    }
+</style>
+
+<body>
+
+    <div id="fadein"></div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            setTimeout(function () {
+                document.getElementById("fadein").remove();
+            }, 1000);
+        };
+    </script>
+
+    <div class="logonav">
+        <img class="KYLEsearchImage" src="https://kyle-inc.github.io/resource/kylesearch/kylesearchlogoblack.png" alt="KYLEsearchLogo">
+    </div>
+
+    <div class="content">
+
+        <h1 class="welcomeheading">Welcome to KYLE Search</h1>
+        <h2 class="welcomenote">With KYLE Search you can browse better, safely and faster with your desired search
+            engine.</h2>
+        <h2 class="welcomenote">It’s your data, your choice.</h2>
+        <img src="https://kyle-inc.github.io/resource/undraw_security_re_a2rk.svg" style="width: 18%; min-width: 200px; float: right; margin-right: 5%;" alt="">
+
+
+        <h2 class="gettingstartedheading">
+            Getting Started_
+        </h2>
+        <div class="gettingstartednote">
+            KYLE Search supports the 3 most used search engines right now
+        </div>
+        <div class="apisoption">
+            <a href="https://kyle-inc.github.io/search/google">
+                <img style="width: 6vw; min-width: 80px;" src="https://kyle-inc.github.io/resource/kylesearch/googlesearch.png" alt="Google">
+            </a>
+
+            <a href="https://kyle-inc.github.io/search/bing">
+                <img style="width: 4vw; min-width: 35px;" src="https://kyle-inc.github.io/resource/kylesearch/bingsearch.png" alt="Bing">
+            </a>
+
+            <a href="https://kyle-inc.github.io/search/brave">
+                <img style="width: 6.5vw; min-width: 80px;" src="https://kyle-inc.github.io/resource/kylesearch/bravesearch.png" alt="Brave">
+            </a>
+        </div>
+
+
+        <h2 class="h2universal" style="padding-top: 15vh;">Private search that puts you first, not big tech</h2>
+        <div class="divuniversal" style="width: 75%;">KYLE Search doesn’t track you or your queries. Ever. Private,
+            independent, and transparent, KYLE Search is the real alternative to your browser's own search gateway. On
+            mobile, desktop, and anywhere the web takes you. Search private. Search with confidence. Get better search
+            results.</div>
+
+
+        <h2 class="h2universal">Search without a trace</h2>
+        <div class="divuniversal" style="width: 75%;">KYLE Search doesn’t track you, your searches, or your clicks. It’s
+            impossible for us to share, sell, or lose your data, because we don’t collect it.</div>
+
+
+        <h2 class="h2universal">Independent search</h2>
+        <div class="divuniversal" style="width: 75%;">Even supposedly “neutral” or “private” search engines rely on big
+            tech for results. KYLE Search is a lot different. We’re beholden to no one.</div>
+
+
+        <h2 class="h2universal">Real transparency</h2>
+        <div class="divuniversal" style="width: 75%;">KYLE Search doesn’t use secret methods or algorithms to bias or
+            censor results. We rely on anonymous community contributions to refine results of your preferred search
+            engine.</div>
+
+
+        <h2 class="h2universal">We take care</h2>
+        <div class="divuniversal" style="width: 75%; padding-bottom: 20vh;">It's your data you must have control over
+            it. That's all of which we take care.</div>
+
+    </div>
+
+</body>
+
+</html>
