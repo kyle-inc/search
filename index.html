@@ -31,11 +31,13 @@
 
     <!-- font-family: "NordiquePro-Semibold"; -->
     <!-- demo: https://www.onlinewebfonts.com/download/621dd29e050b14aea6958e1b3f697ee3 -->
-    <link href="https://db.onlinewebfonts.com/c/621dd29e050b14aea6958e1b3f697ee3?family=NordiquePro-Semibold" rel="stylesheet">
+    <link href="https://db.onlinewebfonts.com/c/621dd29e050b14aea6958e1b3f697ee3?family=NordiquePro-Semibold"
+        rel="stylesheet">
 
     <!-- font-family: "Afrobeat W00 Normal"; -->
     <!-- demo: https://www.onlinewebfonts.com/download/fabf87651926ea5dba6b34559ba25409 -->
-    <link href="https://db.onlinewebfonts.com/c/fabf87651926ea5dba6b34559ba25409?family=Afrobeat+W00+Normal" rel="stylesheet">
+    <link href="https://db.onlinewebfonts.com/c/fabf87651926ea5dba6b34559ba25409?family=Afrobeat+W00+Normal"
+        rel="stylesheet">
 
     <!-- Fontawesome CDN Link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
@@ -87,7 +89,8 @@
 
 
     body {
-        background-color: #0d1117;
+        /* background-color: #0d1117; */
+        background-color: #202124;
         background-repeat: no-repeat;
         background-attachment: fixed;
         margin: 0;
@@ -97,11 +100,13 @@
 
     .logonav {
         width: 100%;
+        z-index: 100;
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
-        backdrop-filter: blur(10px);
+        /* backdrop-filter: blur(10px); */
+        background-color: black;
     }
 
     .KYLEsearchImage {
@@ -112,22 +117,35 @@
         padding: 1vh 0;
     }
 
+    .colorbar {
+        width: 100%;
+        position: fixed;
+        z-index: 50;
+        top: 0;
+        height: 3.8vw;
+        /* max-height: 68px; */
+        min-height: 65px;
+        background-color: #42378f;
+        background-image: linear-gradient(315deg, #42378f 0%, #f53844 74%);
+    }
+
     .content {
         margin-top: 9vh;
     }
 
     .welcomeheading {
         font-family: 'Ubuntu', sans-serif;
-        font-size: 35px;
-        padding-left: 5vw;
-        padding-top: 33vh;
+        font-size: 45px;
+        padding-left: 4vw;
+        padding-top: 31vh;
         color: #318CE7;
     }
 
     .welcomenote {
         font-family: 'Fredoka', sans-serif;
-        font-size: 21px;
-        padding-left: 5vw;
+        font-weight: 100;
+        font-size: 27px;
+        padding-left: 4.1vw;
         margin-top: 0;
         color: whitesmoke;
     }
@@ -142,9 +160,9 @@
 
     .gettingstartednote {
         font-family: 'Fredoka', sans-serif;
-        font-size: 21px;
-        font-weight: bold;
-        padding-left: 5vw;
+        font-weight: 100;
+        font-size: 27px;
+        padding-left: 3.5vw;
         color: whitesmoke;
     }
 
@@ -163,36 +181,29 @@
 
     .h2universal {
         font-family: 'Ubuntu', sans-serif;
-        font-size: 35px;
+        font-size: 40px;
         padding-left: 3.5vw;
         padding-top: 18vh;
-        color: #0047AB;
+        color: #1e90ff
     }
 
     .divuniversal {
         font-family: 'Fredoka', sans-serif;
-        font-size: 21px;
-        font-weight: bold;
-        padding-left: 5vw;
+        font-weight: 100;
+        font-size: 27px;
+        padding-left: 3.55vw;
         color: whitesmoke;
     }
 </style>
 
 <body>
 
-    <div id="fadein"></div>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
-    <script type="text/javascript">
-        window.onload = function () {
-            setTimeout(function () {
-                document.getElementById("fadein").remove();
-            }, 1000);
-        };
-    </script>
-
     <div class="logonav">
-        <img class="KYLEsearchImage" src="https://kyle-inc.github.io/resource/kylesearch/kylesearchlogowhite.png" alt="KYLEsearchLogo">
+        <img class="KYLEsearchImage" src="https://kyle-inc.github.io/resource/kylesearch/kylesearchlogowhite.png"
+            alt="KYLEsearchLogo">
     </div>
+
+    <div class="colorbar"></div>
 
     <div class="content">
 
@@ -200,7 +211,8 @@
         <h2 class="welcomenote">With KYLE Search you can browse better, safely and faster with your desired search
             engine.</h2>
         <h2 class="welcomenote">It’s your data, your choice.</h2>
-        <img src="https://kyle-inc.github.io/resource/undraw_security_re_a2rk.svg" style="width: 18%; min-width: 200px; float: right; margin-right: 5%;" alt="">
+        <img src="https://kyle-inc.github.io/resource/undraw_security_re_a2rk.svg"
+            style="width: 18%; min-width: 200px; float: right; margin-right: 5%;" alt="">
 
 
         <h2 class="gettingstartedheading">
@@ -211,15 +223,18 @@
         </div>
         <div class="apisoption">
             <a href="https://kyle-inc.github.io/search/google">
-                <img style="width: 6vw; min-width: 80px;" src="https://kyle-inc.github.io/resource/kylesearch/googlesearch.png" alt="Google">
+                <img style="width: 6vw; min-width: 80px;"
+                    src="https://kyle-inc.github.io/resource/kylesearch/googlesearch.png" alt="Google">
             </a>
 
             <a href="https://kyle-inc.github.io/search/bing">
-                <img style="width: 4vw; min-width: 35px;" src="https://kyle-inc.github.io/resource/kylesearch/bingsearch.png" alt="Bing">
+                <img style="width: 4vw; min-width: 35px;"
+                    src="https://kyle-inc.github.io/resource/kylesearch/bingsearch.png" alt="Bing">
             </a>
 
             <a href="https://kyle-inc.github.io/search/brave">
-                <img style="width: 6.5vw; min-width: 80px;" src="https://kyle-inc.github.io/resource/kylesearch/bravesearch.png" alt="Brave">
+                <img style="width: 6.5vw; min-width: 80px;"
+                    src="https://kyle-inc.github.io/resource/kylesearch/bravesearch.png" alt="Brave">
             </a>
         </div>
 
@@ -260,7 +275,8 @@
             <div class="top">
 
                 <div class="logo-details">
-                    <img src="https://kyle-inc.github.io/resource/kyle/kylelogowhite.png" style="width: 8vw; min-width: 100px; padding: 5px 5px;" alt="">
+                    <img src="https://kyle-inc.github.io/resource/kyle/kylelogowhite.png"
+                        style="width: 8vw; min-width: 100px; padding: 5px 5px;" alt="">
                 </div>
 
                 <div class="media-icons">
