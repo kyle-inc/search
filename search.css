@@ -166,7 +166,7 @@ div.websites {
 
 
 /* medium search box css */
-@import url('https://fonts.googleapis.com/css?family=Lato');
+/* @import url('https://fonts.googleapis.com/css?family=Lato');
 
 * {
     box-sizing: border-box;
@@ -175,7 +175,7 @@ div.websites {
 
 .autocomplete-search-box {
     width: 50%;
-    /* box-shadow: 0 2px 10px 0px rgba(0, 0, 0, 0.25); */
+    /* box-shadow: 0 2px 10px 0px rgba(0, 0, 0, 0.25);
     box-shadow: 0 2px 10px 0px transparent;
     border-radius: 10px;
     overflow: hidden;
@@ -198,6 +198,38 @@ div.websites {
     background-position: 13px 12px;
     background-repeat: no-repeat;
     padding-left: 45px;
+} */
+
+.search-box {
+    width: 50%;
+    min-width: 390px;
+    background-color: var(--inputfield-color);
+    border-radius: 10px;
+    margin: auto;
+    margin-top: 5vh;
+}
+
+.search-field {
+    width: 85%;
+    color: var(--inputfield-color);
+    background-color: var(--inputfield-background);
+    margin: auto;
+    border: solid var(--inputfield-color) 3px;
+    outline: none;
+    border-radius: 10px;
+    font-size: 18px;
+    padding: 10px 20px;
+}
+
+.search-button {
+    min-width: 7.3%;
+    width: fit-content;
+    /* min-width: 60px; */
+    background-color: var(--inputfield-color);
+    border: solid var(--inputfield-color) 2px;
+    border-radius: 10px;
+    padding: 4.4px 10px;
+    position: absolute;
 }
 
 
