@@ -202,15 +202,17 @@ div.websites {
 
 .search-box {
     width: 50%;
-    min-width: 390px;
-    background-color: var(--inputfield-color);
+    min-width: 330px;
+    /* background-color: var(--inputfield-color); */
+    background-color: #f53844;
     border-radius: 10px;
     margin: auto;
     margin-top: 5vh;
 }
 
 .search-field {
-    width: 85%;
+    /* width: 85%; */
+    width: 82%;
     color: var(--inputfield-color);
     background-color: var(--inputfield-background);
     margin: auto;
@@ -222,7 +224,8 @@ div.websites {
 }
 
 .search-button {
-    min-width: 7.3%;
+    /* min-width: 7.3%; */
+    min-width: 8.9%;
     width: fit-content;
     /* min-width: 60px; */
     background-color: var(--inputfield-color);
