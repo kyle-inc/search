@@ -29,7 +29,7 @@
 
 
 ::selection {
-    color: grey;
+    color: white;
     background: transparent;
 }
 
@@ -166,7 +166,7 @@ div.websites {
 
 
 
-
+/* search-box */
 .search-box {
     width: 50%;
     min-width: 330px;
@@ -205,6 +205,53 @@ div.websites {
 
 
 
+/* info-button */
+.aboutbutton {
+    position: fixed;
+    top: 92%;
+    right: 3vw;
+    /* padding: 10px 10px; */
+    /* background-color: var(--inputfield-background); */
+    /* border-radius: 5px; */
+    text-decoration: none;
+    color: var(--font-color);
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    /* background: var(--background-color); */
+    /* backdrop-filter: blur(10px); */
+    backdrop-filter: brightness(20%);
+    align-items: center;
+    justify-content: center;
+}
+
+.aboutcontent {
+    width: 40vw;
+    min-width: 40vh;
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    position: relative;
+    background: var(--inputfield-color);
+    /* padding: 4em 5em; */
+    padding: 10vh 5vw;
+    border-radius: 10px;
+    color: var(--inputfield-background);
+}
+
+.modal:target {
+    display: flex;
+}
+
+
+
+
+
+
+
+
+
 .kylelogopara {
     position: fixed;
     top: 88%;
@@ -218,41 +265,4 @@ div.websites {
 
 .kylelogo {
     width: 10vh;
-}
-
-
-
-
-
-
-
-.box {
-    position: fixed;
-    top: 92%;
-    right: 3vw;
-    padding: 10px 10px;
-    background-color: var(--inputfield-background);
-    border-radius: 5px;
-    text-decoration: none;
-    color: var(--font-color);
-}
-
-.modal {
-    position: fixed;
-    inset: 0;
-    background: var(--background-color);
-    align-items: center;
-    justify-content: center;
-}
-
-.content {
-    position: relative;
-    background: var(--inputfield-color);
-    /* padding: 4em 5em; */
-    padding: 40vh 4vw;
-    border-radius: 4px;
-}
-
-.modal:target {
-    display: flex;
 }

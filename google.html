@@ -13,7 +13,7 @@
     <meta name="robots" content="index, follow">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="icon" href="https://kyle-inc.github.io/resource/kylesearch/kylesearch.png" type="image/x-icon">
+    <link rel="icon" href="https://kyle-inc.github.io/resource/kyle-search/kyle-search-icon.png" type="image/x-icon">
     <title>KYLE Search</title>
 
     <!-- CSS for Bootstrap -->
@@ -64,17 +64,17 @@
 
         <a href="google">
             <img class="engine-image, engine-active"
-                src="https://kyle-inc.github.io/resource/kylesearch/googlesearch.png" alt="Google"
+                src="https://kyle-inc.github.io/resource/kyle-search/google.png" alt="Google"
                 style="width: 3.5vh;">
         </a>
 
         <a href="bing">
-            <img class="engine-image" src="https://kyle-inc.github.io/resource/kylesearch/bingsearch.png" alt="Bing"
+            <img class="engine-image" src="https://kyle-inc.github.io/resource/kyle-search/bing.png" alt="Bing"
                 style="width: 2.2vh;">
         </a>
 
         <a href="brave">
-            <img class="engine-image" src="https://kyle-inc.github.io/resource/kylesearch/bravesearch.png" alt="Brave"
+            <img class="engine-image" src="https://kyle-inc.github.io/resource/kyle-search/brave.png" alt="Brave"
                 style="width: 3.5vh;">
         </a>
 
@@ -101,45 +101,44 @@
     <div class="kylesearchbranding">
         <a href="https://kyle-inc.github.io/search">
             <img class="searchlogo" id="searchlogo"
-                src="https://kyle-inc.github.io/resource/kylesearch/kylesearchlogoblack.png">
+                src="https://kyle-inc.github.io/resource/kyle-search/kyle-search-logo-black.png">
         </a>
     </div>
 
     <div class="search-box">
         <form action="https://www.google.com/search?q=KYLESearch">
             <input type="text" name="q" class="search-field" placeholder="Search on Google with Kyle" />
-            <button class="search-button"><img width="40px"
-                    src="https://kyle-inc.github.io/resource/kylesearch/kylesearch.png" alt=""></button>
+            <button class="search-button"><img width="40px" src="https://kyle-inc.github.io/resource/kyle-search/kyle-search-icon.png" alt=""></button>
         </form>
     </div>
 
-
-
-
-    <a class="box" href="#popup-box">About</a>
-    <div id="popup-box" class="modal">
-        <div class="content">
-            <h1 style="font-family: 'Ubuntu', sans-serif; font-size: 30px; color: #318CE7;">KYLE Search V5.0.0</h1>
-            <p>Feature drop coming soon!</p>
-            <a href="#" style="
-                    position: absolute;
-                    /* top: 10px; */
-                    top: 1px;
-                    right: 10px;
-                    color: #fe0606;
-                    font-size: 30px;
-                    text-decoration: none;
-                ">&times;</a>
+    <a class="aboutbutton" href="#about"> <img id="infobutton" src="https://kyle-inc.github.io/resource/info-button/info-button-black.svg" alt=""> </a>
+    <div id="about" class="modal">
+        <div class="aboutcontent">
+            <h1 style="font-family: 'Ubuntu', sans-serif; font-size: 35px; color: #318CE7; padding-bottom: 20px;">KYLE Search V5.2.1</h1>
+            <p style="padding: 5px 10px;">Feature drop 6 coming soon!</p>
+            <p style="padding: 5px 10px;">
+                Highlights:
+                <p style="padding: 15px 20px;">
+                    > Profile sync across all your devices
+                    <br>
+                    > Widgets
+                    <br>
+                    > Next level customization
+                    <br>
+                    > Integration with Google Calendar
+                    <br>
+                    > Integration with Google Drive
+                </p>
+            </p>
+            <a href="google" style="position: absolute; top: 2px; right: 20px; color: #fe0606; font-size: 40px; text-decoration: none;">&times;</a>
         </div>
     </div>
 
-
-
-
     <div class="kylelogopara">
         <a href="https://kyle-inc.github.io/kyle.com">
-            <img class="kylelogo" id="kylelogo" src="">
-            <!-- <img class="kylelogo" id="kylelogo" src="https://kyle-inc.github.io/resource/kyle/kylelogoblack.png"> -->
+            <!-- <img class="kylelogo" id="kylelogo" src=""> -->
+            <img class="kylelogo" id="kylelogo" src="https://kyle-inc.github.io/resource/kyle/kylelogoblack.png">
         </a>
     </div>
 
@@ -156,14 +155,16 @@
 
         if (localData == "light") {
             modeicon.src = "https://kyle-inc.github.io/resource/modeswitchbutton/darkmodeicon.svg";
-            kylelogo.src = "https://kyle-inc.github.io/resource/kyle/kylelogoblack.png"
-            searchlogo.src = "https://kyle-inc.github.io/resource/kylesearch/kylesearchlogoblack.png"
+            kylelogo.src = "https://kyle-inc.github.io/resource/kyle/kylelogoblack.png";
+            searchlogo.src = "https://kyle-inc.github.io/resource/kyle-search/kyle-search-logo-black.png";
+            infobutton.src = "https://kyle-inc.github.io/resource/info-button/info-button-black.svg";
             document.body.classList.remove("dark-theme");
         }
         else if (localData == "dark") {
             modeicon.src = "https://kyle-inc.github.io/resource/modeswitchbutton/lightmodeicon.svg";
-            kylelogo.src = "https://kyle-inc.github.io/resource/kyle/kylelogowhite.png"
-            searchlogo.src = "https://kyle-inc.github.io/resource/kylesearch/kylesearchlogowhite.png"
+            kylelogo.src = "https://kyle-inc.github.io/resource/kyle/kylelogowhite.png";
+            searchlogo.src = "https://kyle-inc.github.io/resource/kyle-search/kyle-search-logo-white.png";
+            infobutton.src = "https://kyle-inc.github.io/resource/info-button/info-button-white.svg";
             document.body.classList.add("dark-theme");
         }
 
@@ -173,14 +174,16 @@
             document.body.classList.toggle("dark-theme");
             if (document.body.classList.contains("dark-theme")) {
                 modeicon.src = "https://kyle-inc.github.io/resource/modeswitchbutton/lightmodeicon.svg";
-                kylelogo.src = "https://kyle-inc.github.io/resource/kyle/kylelogowhite.png"
-                searchlogo.src = "https://kyle-inc.github.io/resource/kylesearch/kylesearchlogowhite.png"
+                kylelogo.src = "https://kyle-inc.github.io/resource/kyle/kylelogowhite.png";
+                searchlogo.src = "https://kyle-inc.github.io/resource/kyle-search/kyle-search-logo-white.png";
+                infobutton.src = "https://kyle-inc.github.io/resource/info-button/info-button-white.svg";
 
                 localStorage.setItem("theme", "dark");
             } else {
                 modeicon.src = "https://kyle-inc.github.io/resource/modeswitchbutton/darkmodeicon.svg";
-                kylelogo.src = "https://kyle-inc.github.io/resource/kyle/kylelogoblack.png"
-                searchlogo.src = "https://kyle-inc.github.io/resource/kylesearch/kylesearchlogoblack.png"
+                kylelogo.src = "https://kyle-inc.github.io/resource/kyle/kylelogoblack.png";
+                searchlogo.src = "https://kyle-inc.github.io/resource/kyle-search/kyle-search-logo-black.png";
+                infobutton.src = "https://kyle-inc.github.io/resource/info-button/info-button-black.svg";
 
                 localStorage.setItem("theme", "light");
             }
