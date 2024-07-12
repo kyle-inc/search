@@ -1,6 +1,7 @@
 /* darkmode css */
 :root {
     --background-color: silver;
+    /* --background-color: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%); */
     --selection-box-background: white;
     --font-color: black;
     --inputfield-background: whitesmoke;
@@ -172,7 +173,7 @@ div.websites {
     background-color: var(--inputfield-color);
     border-radius: 10px;
     margin: auto;
-    margin-top: 5vh;
+    margin-top: 6vh;
 }
 
 .search-field {
@@ -217,4 +218,41 @@ div.websites {
 
 .kylelogo {
     width: 10vh;
+}
+
+
+
+
+
+
+
+.box {
+    position: fixed;
+    top: 92%;
+    right: 3vw;
+    padding: 10px 10px;
+    background-color: var(--inputfield-background);
+    border-radius: 5px;
+    text-decoration: none;
+    color: var(--font-color);
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: var(--background-color);
+    align-items: center;
+    justify-content: center;
+}
+
+.content {
+    position: relative;
+    background: var(--inputfield-color);
+    /* padding: 4em 5em; */
+    padding: 40vh 4vw;
+    border-radius: 4px;
+}
+
+.modal:target {
+    display: flex;
 }
