@@ -222,7 +222,7 @@ div.websites {
     inset: 0;
     /* background: var(--background-color); */
     /* backdrop-filter: blur(10px); */
-    backdrop-filter: brightness(15%);
+    backdrop-filter: brightness(25%);
     align-items: center;
     justify-content: center;
 }
