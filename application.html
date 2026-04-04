@@ -226,37 +226,43 @@
 
         /* --- macOS Scroll-Expanding Dock --- */
         .bottom-bar {
-            position: fixed; bottom: 24px; left: 50%;
-            transform: translateX(-50%) translateZ(0); 
-            /* Updated: Set to match expanded width so it doesn't animate horizontally */
+            position: fixed; 
+            bottom: 20px; /* Updated: Kept constant so the browser doesn't calculate Y-axis movement */
+            left: 50%;
+            
+            /* Updated: translate3d forces the GPU to create a dedicated rendering layer */
+            transform: translate3d(-50%, 0, 0); 
+            -webkit-transform: translate3d(-50%, 0, 0);
+            
             width: 96%; max-width: 1600px; 
             height: 76px;
             background: var(--dock-bg); 
             backdrop-filter: blur(40px) saturate(180%); 
             -webkit-backdrop-filter: blur(40px) saturate(180%);
-            border: 1px solid var(--glass-border); border-radius: 38px; 
+            border: 1px solid var(--glass-border); 
+            border-radius: 38px; 
             box-shadow: 0 10px 40px rgba(0,0,0,0.1);
             z-index: 100; display: flex; flex-direction: column; justify-content: space-between; 
             overflow: hidden; cursor: pointer;
             
-            /* Updated: Removed width and max-width from transitions */
+            /* THE FIX: We ONLY transition height and background. 
+            Removed box-shadow, border-radius, and bottom from the transition list. */
             transition: height 0.4s cubic-bezier(0.25, 1, 0.5, 1),
-                        bottom 0.4s cubic-bezier(0.25, 1, 0.5, 1),
-                        border-radius 0.4s cubic-bezier(0.25, 1, 0.5, 1),
-                        background-color 0.4s ease, 
-                        box-shadow 0.4s ease,
-                        backdrop-filter 0.4s ease; /* Added to smoothly fade out blur */
+                        background-color 0.4s ease;
                         
-            /* Updated: hardware acceleration hints */            
-            will-change: height, bottom, transform;
+            will-change: height;
             backface-visibility: hidden;
         }
 
         .bottom-bar.expanded {
-            height: 85vh; border-radius: 40px; bottom: 20px;
-            background: var(--dock-expanded-bg); box-shadow: 0 30px 80px rgba(0,0,0,0.2); cursor: default;
+            height: 85vh; 
+            border-radius: 40px; 
+            /* bottom: 20px; -> Removed entirely so it doesn't override the base class */
+            background: var(--dock-expanded-bg); 
+            box-shadow: 0 30px 80px rgba(0,0,0,0.2); 
+            cursor: default;
             
-            /* Updated: Remove the heavy blur on expansion to save GPU rendering on mobile */
+            /* Remove blur on expansion for GPU relief */
             backdrop-filter: none;
             -webkit-backdrop-filter: none;
         }
