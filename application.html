@@ -13,10 +13,12 @@
         /* --- Apple-Level Liquid Glass Theme Variables --- */
         :root {
             --bg-base: #f5f5f7;
-            --blob-1: #ff2a85;
-            --blob-2: #8a2be2;
-            --blob-3: #4facfe;
-            --blob-opacity: 0.6; 
+            
+            /* Lightened gradients by ~20% for a softer light mode */
+            --blob-1: #ff6bb1; /* Was #ff2a85 */
+            --blob-2: #ab66f2; /* Was #8a2be2 */
+            --blob-3: #82ccff; /* Was #4facfe */
+            --blob-opacity: 0.45; /* Dialed back slightly for softer blending */
             
             --glass-bg: rgba(255, 255, 255, 0.45);
             --glass-border: rgba(255, 255, 255, 0.6);
@@ -39,10 +41,13 @@
         }
 
         body.dark-theme {
-            --bg-base: #000000;
-            --blob-1: #5e17eb;
-            --blob-2: #ff007f;
-            --blob-3: #00e1ff;
+            /* Google's default dark mode background color */
+            --bg-base: #202124; 
+            
+            /* Gradients darkened by ~30% for a deeper, subtler look */
+            --blob-1: #4210a4; /* Was #5e17eb */
+            --blob-2: #b20059; /* Was #ff007f */
+            --blob-3: #009db2; /* Was #00e1ff */
             --blob-opacity: 0.15; 
             
             --glass-bg: rgba(30, 30, 30, 0.45);
@@ -76,19 +81,15 @@
         body {
             background-color: var(--bg-base);
             color: var(--text-primary);
-            height: 150vh; 
+            height: 110vh; 
             overflow-x: hidden;
             position: relative;
             scroll-behavior: smooth;
         }
 
         /* --- Custom macOS Style Overlay Scrollbar --- */
-        ::-webkit-scrollbar {
-            width: 14px; 
-        }
-        ::-webkit-scrollbar-track {
-            background: transparent; 
-        }
+        ::-webkit-scrollbar { width: 14px; }
+        ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb {
             background-color: var(--scrollbar-thumb);
             border-radius: 10px;
@@ -96,17 +97,13 @@
             background-clip: padding-box;
             transition: background-color 0.3s ease;
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background-color: var(--scrollbar-thumb-hover);
-        }
+        ::-webkit-scrollbar-thumb:hover { background-color: var(--scrollbar-thumb-hover); }
 
         /* --- Liquid Ambient Background --- */
         .bg-blobs {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            z-index: -1;
-            overflow: hidden;
-            pointer-events: none;
+            z-index: -1; overflow: hidden; pointer-events: none;
             background-color: var(--bg-base);
         }
         .blob {
@@ -114,17 +111,19 @@
             border-radius: 50%;
             filter: blur(80px);
             opacity: var(--blob-opacity);
-            animation: float 15s infinite alternate ease-in-out;
+            animation: morphFloat 15s infinite alternate ease-in-out;
             transition: opacity 0.4s ease;
         }
-        .blob-1 { width: 40vw; height: 40vw; background: var(--blob-1); top: -10%; left: -10%; }
-        .blob-2 { width: 35vw; height: 35vw; background: var(--blob-2); bottom: -5%; right: -5%; animation-delay: -5s; }
-        .blob-3 { width: 30vw; height: 30vw; background: var(--blob-3); top: 40%; left: 40%; animation-delay: -10s; }
+        
+        /* Adjusted blob-2 right property to 8% to shift it right while preserving scrollbar clearance */
+        .blob-1 { width: 40vw; height: 40vw; background: var(--blob-1); top: -10%; left: -15%; }
+        .blob-2 { width: 35vw; height: 35vw; background: var(--blob-2); bottom: 25%; right: 8%; animation-delay: -5s; }
+        .blob-3 { width: 30vw; height: 30vw; background: var(--blob-3); top: 40%; left: 25%; animation-delay: -10s; }
 
-        @keyframes float {
-            0% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(5%, 10%) scale(1.1); }
-            100% { transform: translate(-5%, -10%) scale(0.9); }
+        @keyframes morphFloat {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+            50% { transform: translate(2%, 10%) scale(1.1) rotate(10deg); border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%; }
+            100% { transform: translate(-5%, -10%) scale(0.9) rotate(-10deg); border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
         }
 
         a, button { text-decoration: none; color: inherit; outline: none; }
@@ -132,36 +131,38 @@
 
         /* --- Top Navigation --- */
         .top-nav {
-            position: fixed;
-            top: 0; left: 0; right: 0;
+            position: fixed; top: 0; left: 0; right: 0;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 24px 40px; z-index: 10;        
+        }
+
+        .live-clock {
+            font-size: 15px; font-weight: 500;
+            color: var(--text-secondary);
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            padding: 8px 20px; border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
             display: flex;
-            justify-content: flex-end;
-            padding: 24px 40px;
-            z-index: 10;        
+            align-items: center;
+            gap: 10px;
         }
 
         .nav-right { display: flex; align-items: center; gap: 20px; }
 
         .icon-btn {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            cursor: pointer;
-            width: 44px; height: 44px;
-            display: flex; align-items: center; justify-content: center;
-            border-radius: 50%;
-            box-shadow: var(--glass-shadow);
+            background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border); cursor: pointer;
+            width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; box-shadow: var(--glass-shadow);
         }
-
         .icon-btn:hover { background: var(--glass-hover-bg); transform: scale(1.05); }
         .icon-btn img { width: 20px; }
 
         .btn-primary {
-            background: var(--btn-primary);
-            color: #fff;
-            padding: 10px 28px;
-            border-radius: 30px;
+            background: var(--btn-primary); color: #fff;
+            padding: 10px 28px; border-radius: 30px;
             font-weight: 500; font-size: 14px;
             backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255,255,255,0.2);
@@ -172,27 +173,17 @@
         .btn-primary:hover { background: var(--btn-primary-hover); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
         .btn-primary:active { transform: scale(0.96); }
 
-        /* --- Main Content (Fixed in background) --- */
+        /* --- Main Content --- */
         .search-wrapper {
-            position: fixed;
-            top: 0; left: 0; right: 0; height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 0 20px;
-            z-index: 2;
-            transition: opacity 0.5s ease, transform 0.5s ease;
+            position: fixed; top: 0; left: 0; right: 0; height: 100vh;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding: 0 20px; z-index: 2;
+            transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
         }
-
-        body.dock-open .search-wrapper {
-            opacity: 0.3;
-            transform: scale(0.98) translateY(-20px);
-        }
+        body.dock-open .search-wrapper { opacity: 0; transform: scale(0.95) translateY(-40px); pointer-events: none; }
 
         .branding .search-logo {
-            max-width: 240px;
-            margin-bottom: 40px;
+            max-width: 220px; margin-bottom: 30px;
             filter: drop-shadow(0 4px 6px rgba(0,0,0,0.05));
             transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
@@ -205,121 +196,96 @@
             width: 100%; height: 56px; border-radius: 28px;
             border: 1px solid var(--glass-border); background: var(--glass-bg);
             backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-            color: var(--text-primary); padding: 0 60px 0 30px; font-size: 16px;
+            color: var(--text-primary); padding: 0 90px 0 30px; font-size: 16px;
             outline: none; box-shadow: var(--glass-shadow);
         }
         .search-input::placeholder { color: var(--text-secondary); opacity: 0.8; }
         .search-input:hover { background: var(--glass-hover-bg); }
         .search-input:focus { background: var(--glass-bg); border-color: rgba(255, 255, 255, 0.8); box-shadow: 0 0 0 4px var(--focus-ring), var(--glass-shadow); }
 
-        .search-btn {
-            position: absolute; right: 18px; background: none; border: none; cursor: pointer;
-            display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%;
+        /* Clear Button (X) */
+        .clear-btn {
+            position: absolute; right: 60px;
+            background: none; border: none; cursor: pointer; color: var(--text-secondary);
+            font-size: 18px; display: none; padding: 10px; transition: color 0.2s;
         }
-        .search-btn img { width: 20px; opacity: 0.6; transition: opacity 0.2s; }
-        .search-btn:hover { transform: scale(1.1); }
-        .search-btn:hover img { opacity: 1; }
+        .clear-btn:hover { color: var(--text-primary); }
+        .search-input:not(:placeholder-shown) + .clear-btn { display: block; }
+
+        .search-btn {
+            position: absolute; right: 12px;
+            background: var(--btn-primary); border: none; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            width: 40px; height: 40px; border-radius: 50%; transition: transform 0.2s, background 0.3s;
+        }
+        body.dark-theme .search-btn { background: var(--glass-bg); border: 1px solid var(--glass-border); }
+        .search-btn img { width: 18px; filter: brightness(0) invert(1); transition: opacity 0.2s; }
+        body.dark-theme .search-btn img { filter: none; }
+        .search-btn:hover { transform: scale(1.08); background: var(--btn-primary-hover); }
+        body.dark-theme .search-btn:hover { background: var(--glass-hover-bg); }
 
         /* --- macOS Scroll-Expanding Dock --- */
         .bottom-bar {
-            position: fixed;
-            bottom: 24px;
-            left: 50%;
-            /* Use a combination of transform and width for centering and performance */
-            transform: translateX(-50%) translateZ(0); /* translateZ(0) forces GPU hardware acceleration */
-            width: 90%;
-            max-width: 1000px;
+            position: fixed; bottom: 24px; left: 50%;
+            transform: translateX(-50%) translateZ(0); 
+            /* Updated: Set to match expanded width so it doesn't animate horizontally */
+            width: 96%; max-width: 1600px; 
             height: 76px;
-            background: var(--dock-bg);
-            backdrop-filter: blur(40px) saturate(180%);
+            background: var(--dock-bg); 
+            backdrop-filter: blur(40px) saturate(180%); 
             -webkit-backdrop-filter: blur(40px) saturate(180%);
-            border: 1px solid var(--glass-border);
-            border-radius: 38px;
+            border: 1px solid var(--glass-border); border-radius: 38px; 
             box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            z-index: 100;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between; 
-            overflow: hidden;
-            cursor: pointer;
+            z-index: 100; display: flex; flex-direction: column; justify-content: space-between; 
+            overflow: hidden; cursor: pointer;
             
-            /* HIGH PERFORMANCE TRANSITIONS: Target specific properties instead of 'all' */
-            transition: width 0.5s cubic-bezier(0.25, 1, 0.5, 1),
-                        max-width 0.5s cubic-bezier(0.25, 1, 0.5, 1),
-                        height 0.5s cubic-bezier(0.25, 1, 0.5, 1),
-                        bottom 0.5s cubic-bezier(0.25, 1, 0.5, 1),
-                        border-radius 0.5s cubic-bezier(0.25, 1, 0.5, 1),
-                        background-color 0.5s ease,
-                        box-shadow 0.5s ease;
+            /* Updated: Removed width and max-width from transitions */
+            transition: height 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+                        bottom 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+                        border-radius 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+                        background-color 0.4s ease, 
+                        box-shadow 0.4s ease,
+                        backdrop-filter 0.4s ease; /* Added to smoothly fade out blur */
                         
-            /* Warn browser of incoming changes to prep GPU */
-            will-change: width, height, bottom, border-radius, max-width;
-            backface-visibility: hidden; /* Reduces flicker on mobile */
+            /* Updated: hardware acceleration hints */            
+            will-change: height, bottom, transform;
+            backface-visibility: hidden;
         }
 
         .bottom-bar.expanded {
-            width: 96%;
-            max-width: 1600px;
-            height: 85vh;
-            border-radius: 40px;
-            bottom: 20px;
-            background: var(--dock-expanded-bg);
-            box-shadow: 0 30px 80px rgba(0,0,0,0.2);
-            cursor: default;
+            height: 85vh; border-radius: 40px; bottom: 20px;
+            background: var(--dock-expanded-bg); box-shadow: 0 30px 80px rgba(0,0,0,0.2); cursor: default;
+            
+            /* Updated: Remove the heavy blur on expansion to save GPU rendering on mobile */
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
         }
 
-        /* Pill Handle Indicator */
         .dock-handle {
-            width: 40px;
-            height: 5px;
-            background: var(--text-secondary);
-            border-radius: 10px;
-            margin: 12px auto 0 auto;
-            opacity: 0.5;
-            transition: opacity 0.3s;
-            flex-shrink: 0;
+            width: 40px; height: 5px; background: var(--text-secondary); border-radius: 10px;
+            margin: 12px auto 0 auto; opacity: 0.5; transition: opacity 0.3s; flex-shrink: 0;
         }
         .bottom-bar:hover .dock-handle { opacity: 0.8; }
         .bottom-bar.expanded .dock-handle { opacity: 0; height: 0; margin: 0; }
 
-        /* The hidden workspace content inside the dock */
         .dock-workspace {
-            flex: 1;
-            width: 100%;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(30px);
-            transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 0; 
-            will-change: transform, opacity;
+            flex: 1; width: 100%; opacity: 0; visibility: hidden;
+            transform: translateY(30px); transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s;
+            display: flex; align-items: center; justify-content: center; height: 0; will-change: transform, opacity;
         }
 
         .bottom-bar.expanded .dock-workspace {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-            height: auto;
-            transition-delay: 0.15s; /* Slightly faster delay for snappiness */
+            opacity: 1; visibility: visible; transform: translateY(0); height: auto; transition-delay: 0.15s;
         }
 
-        /* The visible base of the dock */
         .dock-base {
-            height: 50px;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 30px;
-            margin-bottom: 10px;
-            flex-shrink: 0; 
+            height: 50px; width: 100%; display: flex; justify-content: space-between; align-items: center;
+            padding: 0 30px; margin-bottom: 10px; flex-shrink: 0; 
         }
 
         /* --- Quick Links Grid inside Dock --- */
         .shortcut-grid { display: flex; flex-direction: column; gap: 40px; align-items: center; }
-        .shortcut-row { display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; }
+        .shortcut-row { display: flex; gap: 25px; flex-wrap: wrap; justify-content: center; }
         .shortcut-group-title { font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-secondary); margin-bottom: 20px; text-align: center; font-weight: 600; }
 
         .app-icon {
@@ -329,8 +295,12 @@
             border: 1px solid var(--glass-border); box-shadow: var(--glass-shadow);
             color: var(--text-primary); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
+
         .app-icon img, .app-icon svg { width: 34px; height: 34px; object-fit: contain; }
-        .app-icon:hover { transform: translateY(-8px) scale(1.05); background: var(--glass-hover-bg); box-shadow: 0 15px 30px rgba(0,0,0,0.15); border-color: rgba(255,255,255,0.8); }
+        .app-icon:hover { 
+            transform: translateY(-8px) scale(1.05); 
+            background: var(--glass-hover-bg); box-shadow: 0 15px 30px rgba(0,0,0,0.15); border-color: rgba(255,255,255,0.8); 
+        }
 
         .ai-icon svg { fill: currentColor; }
         .ai-icon.gemini svg { fill: #1a73e8; }
@@ -355,19 +325,10 @@
 
         /* Scroll Hint Arrow */
         .scroll-hint {
-            position: absolute;
-            bottom: 120px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: var(--text-secondary);
-            font-size: 12px;
-            opacity: 0.6;
-            animation: bounce 2s infinite;
-            pointer-events: none;
-            transition: opacity 0.3s;
+            position: absolute; bottom: 120px; left: 50%; transform: translateX(-50%);
+            display: flex; flex-direction: column; align-items: center;
+            color: var(--text-secondary); font-size: 12px; opacity: 0.6;
+            animation: bounce 2s infinite; pointer-events: none; transition: opacity 0.3s;
         }
         body.dock-open .scroll-hint { opacity: 0; }
 
@@ -379,111 +340,49 @@
         
         /* --- macOS Style Modal --- */
         .modal {
-            position: fixed;
-            inset: 0;
-            background: var(--modal-bg);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.4s ease, visibility 0.4s;
-            z-index: 1000;
+            position: fixed; inset: 0; background: var(--modal-bg);
+            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; visibility: hidden; transition: opacity 0.4s ease, visibility 0.4s; z-index: 1000;
         }
-
-        .modal.active {
-            opacity: 1;
-            visibility: visible;
-        }
+        .modal.active { opacity: 1; visibility: visible; }
 
         .modal-content {
-            background: var(--glass-bg);
-            backdrop-filter: blur(40px) saturate(200%);
-            -webkit-backdrop-filter: blur(40px) saturate(200%);
-            border: 1px solid var(--glass-border);
-            color: var(--text-primary);
-            padding: 40px;
-            border-radius: 24px;
-            width: 90%;
-            max-width: 420px;
-            position: relative;
-            box-shadow: 0 24px 60px rgba(0,0,0,0.2);
-            transform: scale(0.95) translateY(20px);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: var(--glass-bg); backdrop-filter: blur(40px) saturate(200%); -webkit-backdrop-filter: blur(40px) saturate(200%);
+            border: 1px solid var(--glass-border); color: var(--text-primary);
+            padding: 40px; border-radius: 24px; width: 90%; max-width: 420px;
+            position: relative; box-shadow: 0 24px 60px rgba(0,0,0,0.2);
+            transform: scale(0.95) translateY(20px); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-
-        .modal.active .modal-content {
-            transform: scale(1) translateY(0);
-        }
+        .modal.active .modal-content { transform: scale(1) translateY(0); }
 
         .close-btn {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 24px;
-            color: var(--text-secondary);
-            background: none;
-            border: none;
-            cursor: pointer;
-            width: 32px; height: 32px;
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            background: rgba(128,128,128,0.1);
-            transition: all 0.3s ease;
+            position: absolute; top: 15px; right: 20px; font-size: 24px; color: var(--text-secondary);
+            background: none; border: none; cursor: pointer; width: 32px; height: 32px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            background: rgba(128,128,128,0.1); transition: all 0.3s ease;
         }
+        .close-btn:hover { color: var(--text-primary); background: rgba(128,128,128,0.2); }
 
-        .close-btn:hover { 
-            color: var(--text-primary); 
-            background: rgba(128,128,128,0.2);
-        }
-
-        .modal-content h2 {
-            font-size: 22px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .modal-content h2 span {
-            font-size: 12px;
-            background: var(--btn-primary);
-            color: white;
-            padding: 3px 8px;
-            border-radius: 12px;
-            font-weight: 500;
-        }
-
-        .modal-body p {
-            color: var(--text-secondary);
-            font-size: 14px;
-        }
-
+        .modal-content h2 { font-size: 22px; font-weight: 600; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .modal-content h2 span { font-size: 12px; background: var(--btn-primary); color: white; padding: 3px 8px; border-radius: 12px; font-weight: 500; }
+        .modal-body p { color: var(--text-secondary); font-size: 14px; }
         .modal-body ul { list-style: none; margin-top: 20px; }
-        .modal-body ul li {
-            padding: 12px 0;
-            border-bottom: 1px solid var(--glass-border);
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            color: var(--text-primary);
-        }
+        .modal-body ul li { padding: 12px 0; border-bottom: 1px solid var(--glass-border); font-size: 14px; display: flex; align-items: center; color: var(--text-primary); }
         .modal-body ul li::before {
-            content: "✓";
-            color: var(--btn-primary);
-            font-weight: bold;
-            font-size: 14px;
-            margin-right: 12px;
-            background: rgba(128,128,128,0.1);
-            width: 24px; height: 24px;
-            border-radius: 50%;
+            content: "✓"; color: var(--btn-primary); font-weight: bold; font-size: 14px; margin-right: 12px;
+            background: rgba(128,128,128,0.1); width: 24px; height: 24px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
         }
         .modal-body ul li:last-child { border-bottom: none; }
 
+        /* Responsive */
+        @media (max-width: 600px) {
+            .app-icon { width: 55px; height: 55px; border-radius: 20%; }
+            .app-icon img, .app-icon svg { width: 26px; height: 26px; }
+            .top-nav { padding: 16px 20px; }
+            .live-clock { display: none; } /* Hide clock on very small screens to save space */
+        }
     </style>
 </head>
 <body class="light-theme">
@@ -495,6 +394,8 @@
     </div>
 
     <header class="top-nav">
+        <div class="live-clock" id="live-clock">--:--</div>
+        
         <div class="nav-right">
             <button id="theme-toggle" class="icon-btn" aria-label="Toggle Dark Mode">
                 <img src="https://kyle-inc.github.io/resource/theme-icon/darkmodeicon.svg" id="modeicon" alt="Dark Mode">
@@ -510,6 +411,7 @@
         <div class="search-container">
             <form id="main-search-form" action="https://www.google.com/search" method="get">
                 <input type="text" id="search-input" name="q" class="search-input" placeholder="Search with Google..." autocomplete="off" autofocus>
+                <button type="button" class="clear-btn" id="clear-btn" aria-label="Clear Search">&times;</button>
                 <button type="submit" class="search-btn" aria-label="Search">
                     <img src="https://kyle-inc.github.io/resource/kyle-search/kyle-search-icon.png" alt="Search">
                 </button>
@@ -556,9 +458,9 @@
             </div>
 
             <div class="engine-switcher" id="engine-controls">
-                <button class="engine-btn active" data-engine="google" data-url="https://www.google.com/search" title="Use Google"><img src="https://kyle-inc.github.io/resource/kyle-search/google.png" alt="Google"></button>
-                <button class="engine-btn" data-engine="bing" data-url="https://www.bing.com/search" title="Use Bing"><img src="https://kyle-inc.github.io/resource/kyle-search/bing.png" alt="Bing"></button>
-                <button class="engine-btn" data-engine="brave" data-url="https://search.brave.com/search" title="Use Brave"><img src="https://kyle-inc.github.io/resource/kyle-search/brave.png" alt="Brave"></button>
+                <button type="button" class="engine-btn active" data-engine="google" data-url="https://www.google.com/search" title="Use Google"><img src="https://kyle-inc.github.io/resource/kyle-search/google.png" alt="Google"></button>
+                <button type="button" class="engine-btn" data-engine="bing" data-url="https://www.bing.com/search" title="Use Bing"><img src="https://kyle-inc.github.io/resource/kyle-search/bing.png" alt="Bing"></button>
+                <button type="button" class="engine-btn" data-engine="brave" data-url="https://search.brave.com/search" title="Use Brave"><img src="https://kyle-inc.github.io/resource/kyle-search/brave.png" alt="Brave"></button>
             </div>
         </div>
     </footer>
@@ -582,6 +484,24 @@
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         
+        // --- Live Clock & Date Logic ---
+        const clockEl = document.getElementById("live-clock");
+
+        function updateTime() {
+            const now = new Date();
+            
+            // Format time: e.g. "06:11 PM"
+            const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            
+            // Format date: e.g. "Sat, Apr 4"
+            const dateString = now.toLocaleDateString([], { weekday: 'short', month: 'short', day: 'numeric' });
+            
+            // Combine them with a bullet separator
+            clockEl.textContent = `${dateString} • ${timeString}`;
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+
         // --- Theme Logic ---
         const themeToggleBtn = document.getElementById("theme-toggle");
         const modeIcon = document.getElementById("modeicon");
@@ -613,18 +533,24 @@
             localStorage.setItem("theme", theme);
         }
 
+        // --- Search Input Extras (Clear button) ---
+        const searchInput = document.getElementById("search-input");
+        const clearBtn = document.getElementById("clear-btn");
+        
+        clearBtn.addEventListener("click", () => {
+            searchInput.value = '';
+            searchInput.focus();
+        });
+
         // --- HIGH PERFORMANCE DOCK SCROLL LOGIC ---
         const dock = document.getElementById('mac-dock');
         let isExpanded = false;
-        let ticking = false; // Used to throttle the scroll event
+        let ticking = false; 
 
         window.addEventListener('scroll', () => {
-            // Only fire on the next animation frame to prevent layout thrashing
             if (!ticking) {
                 window.requestAnimationFrame(() => {
-                    const shouldExpand = window.scrollY > 15;
-                    
-                    // Only update the DOM if the state actually changed
+                    const shouldExpand = window.scrollY > 20; 
                     if (shouldExpand && !isExpanded) {
                         dock.classList.add('expanded');
                         document.body.classList.add('dock-open');
@@ -640,14 +566,12 @@
             }
         });
 
-        // Click to expand dock
         dock.addEventListener('click', (e) => {
             if (!isExpanded) {
                 window.scrollTo({ top: 100, behavior: 'smooth' });
             }
         });
 
-        // Prevent elements from triggering the dock expansion when clicked
         document.getElementById('kyle-brand-link').addEventListener('click', (e) => e.stopPropagation());
         
         // --- Modal Logic ---
@@ -660,7 +584,7 @@
         function closeModal() { modal.classList.remove("active"); }
 
         openModalBtn.addEventListener("click", (e) => {
-            e.stopPropagation(); // Prevents dock from expanding
+            e.stopPropagation(); 
             openModal();
         });
         
@@ -672,12 +596,11 @@
 
         // --- Search Engine Switcher ---
         const searchForm = document.getElementById("main-search-form");
-        const searchInput = document.getElementById("search-input");
         const engineBtns = document.querySelectorAll(".engine-btn");
 
         engineBtns.forEach(btn => {
             btn.addEventListener("click", (e) => {
-                e.stopPropagation(); // prevent opening dock if clicked while closed
+                e.stopPropagation(); 
                 engineBtns.forEach(b => b.classList.remove("active"));
                 btn.classList.add("active");
 
@@ -688,7 +611,7 @@
                 const capitalizedName = engineName.charAt(0).toUpperCase() + engineName.slice(1);
                 searchInput.setAttribute("placeholder", `Search with ${capitalizedName}...`);
                 
-                if(window.scrollY < 15) { searchInput.focus(); }
+                if(window.scrollY < 20) { searchInput.focus(); }
             });
         });
 
