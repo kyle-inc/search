@@ -228,14 +228,14 @@
         /* --- macOS Scroll-Expanding Dock --- */
         .bottom-bar {
             position: fixed; 
-            bottom: 20px; 
+            bottom: 15px; 
             left: 50%;
             
             transform: translate3d(-50%, 0, 0); 
             -webkit-transform: translate3d(-50%, 0, 0);
             
-            width: 96%; max-width: 1600px; 
-            height: 76px;
+            width: calc(100% - 30px); max-width: 1600px; 
+            height: 75px;
             background: var(--dock-bg); 
             
             /* Blur removed entirely for GPU optimization */
@@ -256,7 +256,7 @@
 
         .bottom-bar.expanded {
             height: 85vh; 
-            border-radius: 40px; 
+            border-radius: 38px; 
             background: var(--dock-expanded-bg); 
             box-shadow: 0 30px 80px rgba(0,0,0,0.2); 
             cursor: default;
@@ -264,7 +264,7 @@
 
         .dock-handle {
             width: 40px; height: 5px; background: var(--text-secondary); border-radius: 10px;
-            margin: 12px auto 0 auto; opacity: 0.5; transition: opacity 0.3s; flex-shrink: 0;
+            margin: 6px auto 0 auto; opacity: 0.5; transition: opacity 0.3s; flex-shrink: 0;
         }
         .bottom-bar:hover .dock-handle { opacity: 0.8; }
         .bottom-bar.expanded .dock-handle { opacity: 0; height: 0; margin: 0; }
@@ -281,7 +281,7 @@
 
         .dock-base {
             height: 50px; width: 100%; display: flex; justify-content: space-between; align-items: center;
-            padding: 0 30px; margin-bottom: 10px; flex-shrink: 0; 
+            padding: 0 18px; margin-bottom: 10px; flex-shrink: 0; 
         }
 
         /* --- Quick Links Grid inside Dock --- */
@@ -311,14 +311,13 @@
 
         /* --- Engine Switcher & Footer Left --- */
         .footer-left { display: flex; align-items: center; gap: 15px; }
-        .kyle-brand { height: 18px; opacity: 0.8; transition: opacity 0.2s; }
-        .kyle-brand:hover { opacity: 1; }
-        .about-link { font-size: 13px; font-weight: 500; color: var(--text-secondary); cursor: pointer; background: none; border: none; }
+        .kyle-brand { height: 30px; padding-top: 5px;}
+        .about-link { font-size: 13px; font-weight: 500; color: var(--text-secondary); cursor: pointer; background: none; border: none;}
         .about-link:hover { color: var(--text-primary); }
 
         .engine-switcher { display: flex; gap: 8px; align-items: center; }
-        .engine-btn { background: none; border: none; cursor: pointer; padding: 8px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
-        .engine-btn img { width: 22px; opacity: 0.4; filter: grayscale(100%); transition: all 0.3s ease; }
+        .engine-btn { background: none; border: none; cursor: pointer; padding: 4px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; min-height: 38px; min-width: 38px;}
+        .engine-btn img { height: 26px; opacity: 0.4; filter: grayscale(100%); transition: all 0.3s ease; }
         .engine-btn:hover { background: rgba(128,128,128,0.1); }
         .engine-btn:hover img, .engine-btn.active img { opacity: 1; filter: grayscale(0%); }
         .engine-btn.active { background: var(--glass-border); box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); }
