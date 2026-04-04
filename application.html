@@ -10,74 +10,56 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     
     <style>
-        /* --- Apple-Level Liquid Glass Theme Variables --- */
         :root {
             --bg-base: #f5f5f7;
-            
-            /* Lightened gradients by ~20% for a softer light mode */
             --blob-1: #ff6bb1;
             --blob-2: #ab66f2;
             --blob-3: #82ccff;
             --blob-opacity: 0.45;
-            
             --glass-bg: rgba(255, 255, 255, 0.45);
             --glass-border: rgba(255, 255, 255, 0.6);
             --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
             --glass-hover-bg: rgba(255, 255, 255, 0.65);
-            
             --text-primary: #1d1d1f;
             --text-secondary: #86868b;
-            
             --btn-primary: rgba(26, 115, 232, 0.9);
             --btn-primary-hover: rgba(21, 87, 176, 1);
             --focus-ring: rgba(0, 125, 250, 0.5);
-            
             --modal-bg: rgba(255, 255, 255, 0.2);
-            /* Updated Dock Variables for smooth non-blur animation */
             --dock-bg: whitesmoke;
             --dock-expanded-bg: whitesmoke;
-
             --scrollbar-thumb: rgba(134, 134, 139, 0.4);
             --scrollbar-thumb-hover: rgba(134, 134, 139, 0.6);
         }
 
         body.dark-theme {
-            /* Google's default dark mode background color */
             --bg-base: #202124; 
-            
-            /* Gradients darkened by ~30% for a deeper, subtler look */
             --blob-1: #4210a4;
             --blob-2: #b20059;
             --blob-3: #009db2;
             --blob-opacity: 0.15; 
-            
             --glass-bg: rgba(30, 30, 30, 0.45);
             --glass-border: rgba(255, 255, 255, 0.1);
             --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
             --glass-hover-bg: rgba(50, 50, 50, 0.6);
-            
             --text-primary: #f5f5f7;
             --text-secondary: #a1a1a6;
-            
             --btn-primary: rgba(138, 180, 248, 0.9);
             --btn-primary-hover: rgba(174, 203, 250, 1);
-            
             --modal-bg: rgba(0, 0, 0, 0.5);
-            /* Updated Dock Variables for smooth non-blur animation */
             --dock-bg: rgba(30, 30, 30, 0.98);
             --dock-expanded-bg: #1e1e1e;
-
             --scrollbar-thumb: rgba(255, 255, 255, 0.2);
             --scrollbar-thumb-hover: rgba(255, 255, 255, 0.4);
         }
 
-        /* --- Global Resets --- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: -apple-system, BlinkMacSystemFont, 'Poppins', sans-serif;
             transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
@@ -89,7 +71,6 @@
             scroll-behavior: smooth;
         }
 
-        /* --- Custom macOS Style Overlay Scrollbar --- */
         ::-webkit-scrollbar { width: 14px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb {
@@ -101,7 +82,6 @@
         }
         ::-webkit-scrollbar-thumb:hover { background-color: var(--scrollbar-thumb-hover); }
 
-        /* --- Liquid Ambient Background --- */
         .bg-blobs {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -130,7 +110,6 @@
         a, button { text-decoration: none; color: inherit; outline: none; }
         button:focus-visible, a:focus-visible, input:focus-visible { box-shadow: 0 0 0 4px var(--focus-ring) !important; }
 
-        /* --- Top Navigation --- */
         .top-nav {
             position: fixed; top: 0; left: 0; right: 0;
             display: flex; justify-content: space-between; align-items: center;
@@ -174,7 +153,6 @@
         .btn-primary:hover { background: var(--btn-primary-hover); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
         .btn-primary:active { transform: scale(0.96); }
 
-        /* --- Main Content --- */
         .search-wrapper {
             position: fixed; top: 0; left: 0; right: 0; height: 100vh;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -204,7 +182,6 @@
         .search-input:hover { background: var(--glass-hover-bg); }
         .search-input:focus { background: var(--glass-bg); border-color: rgba(255, 255, 255, 0.8); box-shadow: 0 0 0 4px var(--focus-ring), var(--glass-shadow); }
 
-        /* Clear Button (X) */
         .clear-btn {
             position: absolute; right: 60px;
             background: none; border: none; cursor: pointer; color: var(--text-secondary);
@@ -225,31 +202,21 @@
         .search-btn:hover { transform: scale(1.08); background: var(--btn-primary-hover); }
         body.dark-theme .search-btn:hover { background: var(--glass-hover-bg); }
 
-        /* --- macOS Scroll-Expanding Dock --- */
         .bottom-bar {
             position: fixed; 
             bottom: 15px; 
             left: 50%;
-            
             transform: translate3d(-50%, 0, 0); 
             -webkit-transform: translate3d(-50%, 0, 0);
-            
             width: calc(100% - 30px); max-width: 1600px; 
             height: 75px;
             background: var(--dock-bg); 
-            
-            /* Blur removed entirely for GPU optimization */
-            
             border: 1px solid var(--glass-border); 
             border-radius: 38px; 
             box-shadow: 0 10px 40px rgba(0,0,0,0.1);
             z-index: 100; display: flex; flex-direction: column; justify-content: space-between; 
             overflow: hidden; cursor: pointer;
-            
-            /* Snappier transition speed */
-            transition: height 0.3s cubic-bezier(0.25, 1, 0.5, 1),
-                        background-color 0.3s ease;
-                        
+            transition: height 0.3s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease;
             will-change: height;
             backface-visibility: hidden;
         }
@@ -284,7 +251,6 @@
             padding: 0 18px; margin-bottom: 10px; flex-shrink: 0; 
         }
 
-        /* --- Quick Links Grid inside Dock --- */
         .shortcut-grid { display: flex; flex-direction: column; gap: 40px; align-items: center; }
         .shortcut-row { display: flex; gap: 25px; flex-wrap: wrap; justify-content: center; }
         .shortcut-group-title { font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-secondary); margin-bottom: 20px; text-align: center; font-weight: 600; }
@@ -314,7 +280,6 @@
         .notebooklm {background-color: #000000;}
         .grok {background-color: #000000;}
 
-        /* --- Engine Switcher & Footer Left --- */
         .footer-left { display: flex; align-items: center; gap: 15px; }
         .kyle-brand { height: 30px; padding-top: 5px;}
         .about-link { font-size: 13px; font-weight: 500; color: var(--text-secondary); cursor: pointer; background: none; border: none;}
@@ -328,7 +293,6 @@
         .engine-btn.active { background: var(--glass-border); box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); }
         .engine-btn.active img { transform: scale(1.1); }
 
-        /* Scroll Hint Arrow */
         .scroll-hint {
             position: absolute; bottom: 120px; left: 50%; transform: translateX(-50%);
             display: flex; flex-direction: column; align-items: center;
@@ -343,7 +307,6 @@
             60% { transform: translateY(-5px) translateX(-50%); }
         }
         
-        /* --- macOS Style Modal --- */
         .modal {
             position: fixed; inset: 0; background: var(--modal-bg);
             backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
@@ -381,12 +344,11 @@
         }
         .modal-body ul li:last-child { border-bottom: none; }
 
-        /* Responsive */
         @media (max-width: 600px) {
             .app-icon { width: 55px; height: 55px; border-radius: 20%; }
             .app-icon img, .app-icon svg { width: 26px; height: 26px; }
             .top-nav { padding: 16px 20px; }
-            .live-clock { display: none; } /* Hide clock on very small screens to save space */
+            .live-clock { display: none; }
         }
     </style>
 </head>
@@ -437,9 +399,9 @@
                 <div>
                     <div class="shortcut-group-title">Workspace</div>
                     <div class="shortcut-row">
-                        <a href="https://kyle-inc.github.io/todo" class="app-icon" title="To-Do" style="background-color: #fff;"><img style="width: 80px; height: 80px;" src="https://kyle-inc.github.io/resource/todo/todo.png" alt="Todo"></a>
-                        <a href="https://response-web.000webhostapp.com/users.php" class="app-icon" title="Response" style="background-color: #fff;"><img style="width: 55px; height: 55px;" src="https://kyle-inc.github.io/resource/response/responseicon.png" alt="Response"></a>
-                        <a href="https://kyle-inc.github.io/notes" class="app-icon" title="Notes" style="background-color: #fff;"><img src="https://kyle-inc.github.io/resource/notes/notesicon.png" alt="Notes"></a>
+                        <a href="https://kyle-inc.github.io/todo" class="app-icon" title="To-Do" style="background-color: #fff;"><img style="width: 3.5rem; height: 3.5rem;" src="https://kyle-inc.github.io/resource/todo/todo.png" alt="Todo"></a>
+                        <a href="https://response-web.000webhostapp.com/users.php" class="app-icon" title="Response" style="background-color: #fff;"><img style="width: 2.8rem; height: 2.8rem;" src="https://kyle-inc.github.io/resource/response/responseicon.png" alt="Response"></a>
+                        <a href="https://kyle-inc.github.io/notes" class="app-icon" title="Notes" style="background-color: #fff;"><img style="width: 2.5rem; height: 2.5rem;" src="https://kyle-inc.github.io/resource/notes/notesicon.png" alt="Notes"></a>
                     </div>
                 </div>
                 <div>
@@ -505,7 +467,6 @@
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         
-        // --- Live Clock & Date Logic ---
         const clockEl = document.getElementById("live-clock");
 
         function updateTime() {
@@ -517,7 +478,6 @@
         setInterval(updateTime, 1000);
         updateTime();
 
-        // --- Theme Logic ---
         const themeToggleBtn = document.getElementById("theme-toggle");
         const modeIcon = document.getElementById("modeicon");
         const kyleLogo = document.getElementById("kylelogo");
@@ -548,7 +508,6 @@
             localStorage.setItem("theme", theme);
         }
 
-        // --- Search Input Extras (Clear button) ---
         const searchInput = document.getElementById("search-input");
         const clearBtn = document.getElementById("clear-btn");
         
@@ -557,7 +516,6 @@
             searchInput.focus();
         });
 
-        // --- HIGH PERFORMANCE DOCK SCROLL LOGIC ---
         const dock = document.getElementById('mac-dock');
         let isExpanded = false;
         let ticking = false; 
@@ -589,7 +547,13 @@
 
         document.getElementById('kyle-brand-link').addEventListener('click', (e) => e.stopPropagation());
         
-        // --- Modal Logic ---
+        document.addEventListener('click', (e) => {
+            const isModalActive = document.getElementById("about-modal").classList.contains("active");
+            if (isExpanded && !dock.contains(e.target) && !isModalActive) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+
         const modal = document.getElementById("about-modal");
         const openModalBtn = document.getElementById("open-about-btn");
         const closeModalBtn = document.getElementById("close-about-btn");
@@ -609,7 +573,6 @@
             if (!modalBox.contains(e.target)) closeModal();
         });
 
-        // --- Search Engine Switcher ---
         const searchForm = document.getElementById("main-search-form");
         const engineBtns = document.querySelectorAll(".engine-btn");
 
@@ -630,7 +593,6 @@
             });
         });
 
-        // --- Keyboard Shortcuts ---
         document.addEventListener("keydown", (e) => {
             if (e.key === "/" && document.activeElement !== searchInput) {
                 e.preventDefault(); 
