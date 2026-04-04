@@ -87,12 +87,11 @@
             width: 14px; 
         }
         ::-webkit-scrollbar-track {
-            background: transparent; /* Completely transparent track */
+            background: transparent; 
         }
         ::-webkit-scrollbar-thumb {
             background-color: var(--scrollbar-thumb);
             border-radius: 10px;
-            /* Magic trick: transparent border + padding-box makes it float */
             border: 4px solid transparent; 
             background-clip: padding-box;
             transition: background-color 0.3s ease;
@@ -226,7 +225,8 @@
             position: fixed;
             bottom: 24px;
             left: 50%;
-            transform: translateX(-50%);
+            /* Use a combination of transform and width for centering and performance */
+            transform: translateX(-50%) translateZ(0); /* translateZ(0) forces GPU hardware acceleration */
             width: 90%;
             max-width: 1000px;
             height: 76px;
@@ -241,8 +241,20 @@
             flex-direction: column;
             justify-content: space-between; 
             overflow: hidden;
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             cursor: pointer;
+            
+            /* HIGH PERFORMANCE TRANSITIONS: Target specific properties instead of 'all' */
+            transition: width 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+                        max-width 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+                        height 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+                        bottom 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+                        border-radius 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+                        background-color 0.5s ease,
+                        box-shadow 0.5s ease;
+                        
+            /* Warn browser of incoming changes to prep GPU */
+            will-change: width, height, bottom, border-radius, max-width;
+            backface-visibility: hidden; /* Reduces flicker on mobile */
         }
 
         .bottom-bar.expanded {
@@ -277,11 +289,12 @@
             opacity: 0;
             visibility: hidden;
             transform: translateY(30px);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s;
             display: flex;
             align-items: center;
             justify-content: center;
             height: 0; 
+            will-change: transform, opacity;
         }
 
         .bottom-bar.expanded .dock-workspace {
@@ -289,7 +302,7 @@
             visibility: visible;
             transform: translateY(0);
             height: auto;
-            transition-delay: 0.2s;
+            transition-delay: 0.15s; /* Slightly faster delay for snappiness */
         }
 
         /* The visible base of the dock */
@@ -600,22 +613,36 @@
             localStorage.setItem("theme", theme);
         }
 
-        // --- Dock Scroll Logic ---
+        // --- HIGH PERFORMANCE DOCK SCROLL LOGIC ---
         const dock = document.getElementById('mac-dock');
-        
+        let isExpanded = false;
+        let ticking = false; // Used to throttle the scroll event
+
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                dock.classList.add('expanded');
-                document.body.classList.add('dock-open');
-            } else {
-                dock.classList.remove('expanded');
-                document.body.classList.remove('dock-open');
+            // Only fire on the next animation frame to prevent layout thrashing
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const shouldExpand = window.scrollY > 15;
+                    
+                    // Only update the DOM if the state actually changed
+                    if (shouldExpand && !isExpanded) {
+                        dock.classList.add('expanded');
+                        document.body.classList.add('dock-open');
+                        isExpanded = true;
+                    } else if (!shouldExpand && isExpanded) {
+                        dock.classList.remove('expanded');
+                        document.body.classList.remove('dock-open');
+                        isExpanded = false;
+                    }
+                    ticking = false;
+                });
+                ticking = true;
             }
         });
 
         // Click to expand dock
         dock.addEventListener('click', (e) => {
-            if (!dock.classList.contains('expanded')) {
+            if (!isExpanded) {
                 window.scrollTo({ top: 100, behavior: 'smooth' });
             }
         });
@@ -661,7 +688,7 @@
                 const capitalizedName = engineName.charAt(0).toUpperCase() + engineName.slice(1);
                 searchInput.setAttribute("placeholder", `Search with ${capitalizedName}...`);
                 
-                if(window.scrollY < 50) { searchInput.focus(); }
+                if(window.scrollY < 15) { searchInput.focus(); }
             });
         });
 
